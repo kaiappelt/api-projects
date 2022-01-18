@@ -1,3 +1,8 @@
-# base-api-node-ts
+# api-projects
 
-Base para a construção de novos projetos NodeJS com Typescript.
+# Criar um banco de dados local 
+
+# Criar o arquivo ormconfig.js na raiz do projeto utilizando como modelo o ormconfig.example. 
+# Executar as migrations com: 
+"npm run typeorm migration:run" ou "yarn typeorm migration:run"
+ 
