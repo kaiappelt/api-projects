@@ -1,3 +1,4 @@
+import RedisCache from "@core/infra/repositories/CacheRepository";
 import AppError from "src/core/domain/errors/AppError";
 import { injectable, inject } from "tsyringe";
 import { IDeleteProject } from "../../domain/models/IDeleteProject";
@@ -8,7 +9,8 @@ import { IProjectsRepository } from "../../domain/repositories/IProjectsReposito
 class DeleteProjectService {
   constructor(
     @inject("ProjectsRepository")
-    private projectsRepository: IProjectsRepository
+    private projectsRepository: IProjectsRepository,
+    private redisCache:RedisCache
   ) {}
 
   public async execute({ id }: IDeleteProject): Promise<void> {
@@ -17,6 +19,8 @@ class DeleteProjectService {
     if (!project) {
       throw new AppError("Registro não encontrado", 400);
     }
+    
+    await this.redisCache.invalidate("api-projects-PROJECTS-LIST");
 
     await this.projectsRepository.remove(project);
   }

@@ -1,5 +1,4 @@
-
-import UpdateProjectService from "src/features/projects/presentation/services/UpdateMessageService";
+import UpdateProjectService from "src/features/projects/presentation/services/UpdateProjectService";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { IController } from "../../../../../core/presentation/contracts/IController";

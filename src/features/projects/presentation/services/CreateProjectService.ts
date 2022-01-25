@@ -4,6 +4,7 @@ import { injectable, inject } from "tsyringe";
 import { ICreateProjects } from "../../domain/models/ICreateProjects";
 import { IProject } from "../../domain/models/IProject";
 import { IProjectsRepository } from "../../domain/repositories/IProjectsRepository";
+import RedisCache from "@core/infra/repositories/CacheRepository";
 
 @injectable()
 class CreateProjectsService {
@@ -12,7 +13,9 @@ class CreateProjectsService {
     private projectsRepository: IProjectsRepository,
      
     @inject("UsersRepository")
-    private usersRepository: IUserRepository
+    private usersRepository: IUserRepository,
+
+    private redisCache:RedisCache
   ) {}
 
   public async execute({
@@ -25,6 +28,8 @@ class CreateProjectsService {
     if(!user){
       throw new AppError("Usuário não existe", 400);
     }
+
+    await this.redisCache.invalidate("api-projects-PROJECTS-LIST");
 
     const project = await this.projectsRepository.create({
       user_id,
