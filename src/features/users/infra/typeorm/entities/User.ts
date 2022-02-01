@@ -1,4 +1,3 @@
-import { IProject } from "src/features/projects/domain/models/IProject";
 import Projects from "src/features/projects/infra/typeorm/entities/Project";
 import { IUser } from "src/features/users/domain/models/IUser";
 import {
@@ -24,8 +23,8 @@ class User implements IUser {
     @Column()
     password: string;
 
-    // @OneToMany(() => Projects, projects => projects.user_id)
-    // projects: Projects[];
+    @OneToMany(() => Projects, projects => projects.user)
+    projects: Projects[];
 
     @CreateDateColumn()
     created_at: Date;

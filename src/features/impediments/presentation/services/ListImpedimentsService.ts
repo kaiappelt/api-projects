@@ -11,17 +11,23 @@ class ListImpedimentsService {
     private redisCache:RedisCache
   ) {}
 
-  public async execute(): Promise<IImpediment[]> {
-    let impediments = await this.redisCache.recover<IImpediment[]>(
-      "api-projects-IMPEDIMENTS-LIST"
-    );
+  // CRIA CHAVE DO CACHE
+  public async execute(): Promise<any[]> {
+    // VERIFICA SE O CACHE EXISTE
+    let impediments = undefined;
+    // let impediments = await 
+    // this.redisCache.recover<IImpediment[]>(
+    //   "api-projects-IMPEDIMENTS-LIST"
+    //   );
 
+      // SE O CACHE NÃO EXISTIR, FAZ A CONSULTA NO BANCO
     if(!impediments){
       impediments = await this.impedimentsRepository.findAll();
 
+      // SALVA OS DADOS NO CACHE
       await this.redisCache.save("api-projects-IMPEDIMENTS-LIST", impediments);
     }
-    
+    // RETORNA OS DADOS VINDOS DO CACHE OU DO BANCO
     return impediments;
   }
 }

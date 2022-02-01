@@ -6,10 +6,10 @@ import { injectable, inject } from "tsyringe";
 import { IUserRepository } from "src/features/users/domain/repositories/IUserRepository";
 import { ICreateSessions } from "../../domain/models/ICreateSessions";
 import { IUserAuthenticated } from "../../domain/models/IUserAuthenticated";
-
 @injectable()
 class CreateSessionsService {
   constructor(
+    // INJEÇÃO DE DEPENDENCIA
     @inject("UsersRepository")
     private usersRepository: IUserRepository
   ) {}
@@ -30,11 +30,13 @@ class CreateSessionsService {
       throw new AppError("Incorrect email/password combination.", 401);
     }
 
+    // CONSTROI TOKEN
     const token = sign({}, authConfig.jwt.secret, {
       subject: user.id,
       expiresIn: authConfig.jwt.expiresIn,
     });
 
+    // RETORNA USUARIO E TOKEN
     return {
       user,
       token,

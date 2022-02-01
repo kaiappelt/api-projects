@@ -10,8 +10,9 @@ class ProjectsRepository implements IProjectsRepository {
     this.ormRepository = getRepository(Projects);
   } 
 
+  // TRAZER USUARIO
   public async findAll(): Promise<Projects[]> {
-    const projects = await this.ormRepository.find();
+    const projects = await this.ormRepository.find({relations:["user"]});
 
     return projects;
   }

@@ -30,6 +30,7 @@ class CreateImpedimentService {
       throw new AppError("Projeto não existe", 404);
     }
 
+    // RESETA O CACHE PARA MANTÊ-LO ATUALIZADO
     await this.redisCache.invalidate("api-projects-IMPEDIMENTS-LIST");
 
     const impediment = await this.impedimentsRepository.create({

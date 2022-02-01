@@ -26,6 +26,7 @@ class UpdateImpedimentService {
       throw new AppError("Registro não encontrado", 404);
     }
     
+    // RESETA O CACHE PARA MANTÊ-LO ATUALIZADO
     await this.redisCache.invalidate("api-projects-IMPEDIMENTS-LIST");
 
     impediment.name = name;

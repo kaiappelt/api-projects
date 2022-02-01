@@ -13,7 +13,6 @@ let updateImpedimentController = new UpdateImpedimentController();
 let deleteImpedimentController = new DeleteImpedimentController();
 let showImpedimentController = new ShowImpedimentController();
 
-// Para listar os usuários cadastrados, é preciso estar autenticado
 impedimentsRoutes.get(
   "/", 
   listImpedimentsController.run

@@ -3,6 +3,8 @@ import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 import authConfig from "@config/auth";
 
+// ROTAS AUTENTICADAS
+// VALIDÇÃO DE TOKEN "LOGIN EXISTENTE"
 interface ITokenPayload {
   iat: number;
   exp: number;

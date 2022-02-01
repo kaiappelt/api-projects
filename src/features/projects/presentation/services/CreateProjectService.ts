@@ -29,6 +29,7 @@ class CreateProjectsService {
       throw new AppError("Usuário não existe", 400);
     }
 
+    // RESETA CACHE "ALTERAÇÕES"
     await this.redisCache.invalidate("api-projects-PROJECTS-LIST");
 
     const project = await this.projectsRepository.create({
