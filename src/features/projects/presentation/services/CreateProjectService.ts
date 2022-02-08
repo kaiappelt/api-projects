@@ -1,8 +1,8 @@
-import { IUserRepository } from "src/features/users/domain/repositories/IUserRepository";
-import AppError from "src/core/domain/errors/AppError";
+import { IUserRepository } from "@features/users/domain/repositories/IUserRepository";
+import AppError from "@core/domain/errors/AppError";
 import { injectable, inject } from "tsyringe";
 import { ICreateProjects } from "../../domain/models/ICreateProjects";
-import { IProject } from "../../domain/models/IProject";
+import { IProject } from "@features/projects/domain/models/IProject";
 import { IProjectsRepository } from "../../domain/repositories/IProjectsRepository";
 import RedisCache from "@core/infra/repositories/CacheRepository";
 

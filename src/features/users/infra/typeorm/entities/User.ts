@@ -1,5 +1,5 @@
-import Projects from "src/features/projects/infra/typeorm/entities/Project";
-import { IUser } from "src/features/users/domain/models/IUser";
+import Projects from "@features/projects/infra/typeorm/entities/Project";
+import { IUser } from "@features/users/domain/models/IUser";
 import {
    Column,
    CreateDateColumn,

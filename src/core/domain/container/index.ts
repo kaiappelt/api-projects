@@ -5,7 +5,7 @@ import { IProjectsRepository } from "src/features/projects/domain/repositories/I
 import ProjectsRepository from "src/features/projects/infra/typeorm/repositories/ProjectsRepository";
 import { IImpedimentsRepository } from "@features/impediments/domain/repositories/IImpedimentsRepository";
 import ImpedimentsRepository from "@features/impediments/infra/typeorm/repositories/ImpedimentsRepository";
-
+import "@features/users/domain/providers";
 // CONFIGURAÇÕES DA INJEÇÃO DE DEPENDENCIAS
 container.registerSingleton<IUserRepository>(
   "UsersRepository",

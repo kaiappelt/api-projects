@@ -1,6 +1,6 @@
 import Impediment from "@features/impediments/infra/typeorm/entities/Impediment";
-import { IProject } from "src/features/projects/domain/models/IProject";
-import User from "src/features/users/infra/typeorm/entities/User";
+import { IProject } from "@features/projects/domain/models/IProject";
+import User from "@features/users/infra/typeorm/entities/User";
 import {
   Column,
   CreateDateColumn,
