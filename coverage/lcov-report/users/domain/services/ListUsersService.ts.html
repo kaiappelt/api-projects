@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for projects/presentation/services/ListProjectsService.ts</title>
+    <title>Code coverage report for users/domain/services/ListUsersService.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">projects/presentation/services</a> ListProjectsService.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">users/domain/services</a> ListUsersService.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/28</span>
+                <span class='fraction'>0/19</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/28</span>
+                <span class='fraction'>0/19</span>
             </div>
         
             
@@ -82,16 +82,7 @@
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a>
-<a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -110,43 +101,25 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import RedisCache from "@core/infra/repositories/CacheRepository";</span></span></span>
-<span class="cstat-no" title="statement not covered" >import { inject, injectable } from "tsyringe";</span>
-<span class="cstat-no" title="statement not covered" >import { IProject } from "../../domain/models/IProject";</span>
-<span class="cstat-no" title="statement not covered" >import { IProjectsRepository } from "../../domain/repositories/IProjectsRepository";</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import { injectable, inject } from "tsyringe";</span></span></span>
+<span class="cstat-no" title="statement not covered" >import { IUserRepository } from "../repositories/IUserRepository";</span>
+<span class="cstat-no" title="statement not covered" >import User from "../../infra/typeorm/entities/User";</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >@injectable()</span>
-<span class="cstat-no" title="statement not covered" >class ListProjectsService {</span>
+<span class="cstat-no" title="statement not covered" >class ListUsersService {</span>
 <span class="cstat-no" title="statement not covered" >  constructor(</span>
-<span class="cstat-no" title="statement not covered" >    @inject("ProjectsRepository")</span>
-<span class="cstat-no" title="statement not covered" >    private projectsRepository: IProjectsRepository,</span>
-<span class="cstat-no" title="statement not covered" >    private redisCache:RedisCache</span>
+<span class="cstat-no" title="statement not covered" >    @inject("UsersRepository")</span>
+<span class="cstat-no" title="statement not covered" >    private usersRepository: IUserRepository</span>
 <span class="cstat-no" title="statement not covered" >  ) {}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  public async execute(): Promise&lt;IProject[]&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    let projects = await this.redisCache.recover&lt;IProject[]&gt;(</span>
-<span class="cstat-no" title="statement not covered" >      "api-projects-PROJECTS-LIST"</span>
-<span class="cstat-no" title="statement not covered" >    );</span>
+<span class="cstat-no" title="statement not covered" >  public async execute(): Promise&lt;User[] | undefined&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const customers = await this.usersRepository.findAll();</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    if(!projects){</span>
-<span class="cstat-no" title="statement not covered" >      projects = await this.projectsRepository.findAll();</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      await this.redisCache.save("api-projects-PROJECTS-LIST", projects);</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >    return projects;</span>
+<span class="cstat-no" title="statement not covered" >    return customers;</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >export default ListProjectsService;</span>
+<span class="cstat-no" title="statement not covered" >export default ListUsersService;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

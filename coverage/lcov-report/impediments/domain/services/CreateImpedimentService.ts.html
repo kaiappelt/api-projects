@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for projects/presentation/services/CreateProjectService.ts</title>
+    <title>Code coverage report for impediments/domain/services/CreateImpedimentService.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">projects/presentation/services</a> CreateProjectService.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">impediments/domain/services</a> CreateImpedimentService.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>45/45</span>
+                <span class='fraction'>47/47</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>45/45</span>
+                <span class='fraction'>47/47</span>
             </div>
         
             
@@ -108,7 +108,9 @@
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -136,68 +138,72 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { IUserRepository } from "@features/users/domain/repositories/IUserRepository";
-import AppError from "@core/domain/errors/AppError";
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import AppError from "@core/domain/errors/AppError";
 import { injectable, inject } from "tsyringe";
-import { ICreateProjects } from "../../domain/models/ICreateProjects";
-import { IProject } from "@features/projects/domain/models/IProject";
-import { IProjectsRepository } from "../../domain/repositories/IProjectsRepository";
 import RedisCache from "@core/infra/repositories/CacheRepository";
+import { IImpedimentsRepository } from "@features/impediments/domain/repositories/IImpedimentsRepository";
+import { IProjectsRepository } from "@features/projects/domain/repositories/IProjectsRepository";
+import { ICreateImpediment } from "@features/impediments/domain/models/ICreateImpediment";
+import { IImpediment } from "@features/impediments/domain/models/IImpediment";
 &nbsp;
 @injectable()
-class CreateProjectsService {
+class CreateImpedimentService {
   constructor(
+    @inject("ImpedimentsRepository")
+    private impedimentsRepository: IImpedimentsRepository,
+     
     @inject("ProjectsRepository")
     private projectsRepository: IProjectsRepository,
-     
-    @inject("UsersRepository")
-    private usersRepository: IUserRepository,
 &nbsp;
     private redisCache:RedisCache
   ) {}
 &nbsp;
   public async execute({
-    user_id,
+    project_id,
     name,
     description,
-  }: ICreateProjects): Promise&lt;IProject&gt; {
-    const user = await this.usersRepository.findById(user_id);
+    active,
+  }: ICreateImpediment): Promise&lt;IImpediment&gt; {
+    const project = await this.projectsRepository.findById(project_id);
 &nbsp;
-    if(!user){
-      throw new AppError("Usuário não existe", 400);
+    if(!project){
+      throw new AppError("Projeto não existe", 404);
     }
 &nbsp;
-    // RESETA CACHE "ALTERAÇÕES"
-    await this.redisCache.invalidate("api-projects-PROJECTS-LIST");
+    // RESETA O CACHE PARA MANTÊ-LO ATUALIZADO
+    await this.redisCache.invalidate("api-projects-IMPEDIMENTS-LIST");
 &nbsp;
-    const project = await this.projectsRepository.create({
-      user_id,
+    const impediment = await this.impedimentsRepository.create({
+      project_id,
       name,
       description,
+      active,
     });
 &nbsp;
-    return project;
+    return impediment;
   }
 }
 &nbsp;
-export default CreateProjectsService;
+export default CreateImpedimentService;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

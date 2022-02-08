@@ -1,7 +1,9 @@
-// CONFIGURAÇÕES DO TOKEN "TEMPO"
+require("dotenv/config");
+
+// CONFIGURAÇÕES DO TOKEN
 export default {
     jwt: {
-        secret: "f8b47d2e95c114112d9cc2158adeb774",
-        expiresIn: "1d",
+        secret: process.env.JWT_SECRET, // "SecretParaTestes",
+        expiresIn: process.env.JWT_EXPIRES, // "1d",
     }
 }
