@@ -1,9 +1,9 @@
 import { IUserRepository } from "@features/users/domain/repositories/IUserRepository";
 import AppError from "@core/domain/errors/AppError";
 import { injectable, inject } from "tsyringe";
-import { ICreateProjects } from "../../domain/models/ICreateProjects";
+import { ICreateProjects } from "../models/ICreateProjects";
 import { IProject } from "@features/projects/domain/models/IProject";
-import { IProjectsRepository } from "../../domain/repositories/IProjectsRepository";
+import { IProjectsRepository } from "../repositories/IProjectsRepository";
 import RedisCache from "@core/infra/repositories/CacheRepository";
 
 @injectable()

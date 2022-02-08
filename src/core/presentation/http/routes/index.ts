@@ -1,7 +1,7 @@
 import { Router } from "express";
 import sessionsRouter from "@features/auth/presentation/routes/sessions.routes";
 import usersRoutes from "@features/users/presentation/routes/users.routes";
-import projectsRoutes from "src/features/projects/presentation/http/routes/projects.routes";
+import projectsRoutes from "@features/projects/presentation/routes/projects.routes";
 import impedimentsRoutes from "@features/impediments/presentation/routes/impediments.routes";
 import isAuthenticated from "../middlewares/isAuthnticated";
 

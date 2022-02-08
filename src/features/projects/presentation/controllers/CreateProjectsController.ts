@@ -1,8 +1,8 @@
 
-import CreateProjectsService from "src/features/projects/presentation/services/CreateProjectService";
+import CreateProjectsService from "@features/projects/domain/services/CreateProjectService";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { IController } from "../../../../../core/presentation/contracts/IController";
+import { IController } from "../../../../core/presentation/contracts/IController";
 
 export default class CreateProjectsController implements IController{
    public async run(request: Request, response: Response): Promise<Response> {

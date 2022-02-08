@@ -1,7 +1,7 @@
 import RedisCache from "@core/infra/repositories/CacheRepository";
 import { inject, injectable } from "tsyringe";
-import { IProject } from "../../domain/models/IProject";
-import { IProjectsRepository } from "../../domain/repositories/IProjectsRepository";
+import { IProject } from "../models/IProject";
+import { IProjectsRepository } from "../repositories/IProjectsRepository";
 @injectable()
 class ListProjectsService {
   constructor(

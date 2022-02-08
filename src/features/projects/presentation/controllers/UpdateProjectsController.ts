@@ -1,7 +1,7 @@
-import UpdateProjectService from "src/features/projects/presentation/services/UpdateProjectService";
+import UpdateProjectService from "@features/projects/domain/services/UpdateProjectService";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { IController } from "../../../../../core/presentation/contracts/IController";
+import { IController } from "../../../../core/presentation/contracts/IController";
 
 export default class UpdateProjectsController implements IController{
   public async run(request: Request, response: Response): Promise<Response> {

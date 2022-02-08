@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for impediments/domain/services/ListImpedimentsService.ts</title>
+    <title>Code coverage report for projects/domain/services/UpdateProjectService.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">impediments/domain/services</a> ListImpedimentsService.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">projects/domain/services</a> UpdateProjectService.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/34</span>
+                <span class='fraction'>0/39</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/34</span>
+                <span class='fraction'>0/39</span>
             </div>
         
             
@@ -97,7 +97,17 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -132,39 +142,44 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import RedisCache from "@core/infra/repositories/CacheRepository";</span></span></span>
-<span class="cstat-no" title="statement not covered" >import { IImpediment } from "@features/impediments/domain/models/IImpediment";</span>
-<span class="cstat-no" title="statement not covered" >import { IImpedimentsRepository } from "@features/impediments/domain/repositories/IImpedimentsRepository";</span>
-<span class="cstat-no" title="statement not covered" >import { inject, injectable } from "tsyringe";</span>
+<span class="cstat-no" title="statement not covered" >import AppError from "src/core/domain/errors/AppError";</span>
+<span class="cstat-no" title="statement not covered" >import { injectable, inject } from "tsyringe";</span>
+<span class="cstat-no" title="statement not covered" >import { IProject } from "../models/IProject";</span>
+<span class="cstat-no" title="statement not covered" >import { IUpdateProject } from "../models/IUpdateProject";</span>
+<span class="cstat-no" title="statement not covered" >import { IProjectsRepository } from "../repositories/IProjectsRepository";</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >@injectable()</span>
-<span class="cstat-no" title="statement not covered" >class ListImpedimentsService {</span>
+<span class="cstat-no" title="statement not covered" >class UpdateProjectService {</span>
 <span class="cstat-no" title="statement not covered" >  constructor(</span>
-<span class="cstat-no" title="statement not covered" >    @inject("ImpedimentsRepository")</span>
-<span class="cstat-no" title="statement not covered" >    private impedimentsRepository: IImpedimentsRepository,</span>
+<span class="cstat-no" title="statement not covered" >    @inject("ProjectsRepository")</span>
+<span class="cstat-no" title="statement not covered" >    private projectsRepository: IProjectsRepository,</span>
 <span class="cstat-no" title="statement not covered" >    private redisCache:RedisCache</span>
 <span class="cstat-no" title="statement not covered" >  ) {}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  // CRIA CHAVE DO CACHE</span>
-<span class="cstat-no" title="statement not covered" >  public async execute(): Promise&lt;IImpediment[]&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    // VERIFICA SE O CACHE EXISTE</span>
-<span class="cstat-no" title="statement not covered" >    let impediments = await </span>
-<span class="cstat-no" title="statement not covered" >    this.redisCache.recover&lt;IImpediment[]&gt;(</span>
-<span class="cstat-no" title="statement not covered" >      "api-projects-IMPEDIMENTS-LIST"</span>
-<span class="cstat-no" title="statement not covered" >      );</span>
+<span class="cstat-no" title="statement not covered" >  public async execute({</span>
+<span class="cstat-no" title="statement not covered" >    id,</span>
+<span class="cstat-no" title="statement not covered" >    name,</span>
+<span class="cstat-no" title="statement not covered" >    description,</span>
+<span class="cstat-no" title="statement not covered" >  </span>
+<span class="cstat-no" title="statement not covered" >  }: IUpdateProject): Promise&lt;IProject&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const project = await this.projectsRepository.findById(id);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      // SE O CACHE NÃO EXISTIR, FAZ A CONSULTA NO BANCO</span>
-<span class="cstat-no" title="statement not covered" >    if(!impediments){</span>
-<span class="cstat-no" title="statement not covered" >      impediments = await this.impedimentsRepository.findAll();</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      // SALVA OS DADOS NO CACHE</span>
-<span class="cstat-no" title="statement not covered" >      await this.redisCache.save("api-projects-IMPEDIMENTS-LIST", impediments);</span>
+<span class="cstat-no" title="statement not covered" >    if (!project) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new AppError("Registro não encontrado", 404);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    // RETORNA OS DADOS VINDOS DO CACHE OU DO BANCO</span>
-<span class="cstat-no" title="statement not covered" >    return impediments;</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >    await this.redisCache.invalidate("api-projects-PROJECTS-LIST");</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    project.name = name;</span>
+<span class="cstat-no" title="statement not covered" >    project.description = description;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    await this.projectsRepository.save(project);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    return project;</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >export default ListImpedimentsService;</span>
+<span class="cstat-no" title="statement not covered" >export default UpdateProjectService;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
